@@ -17,3 +17,7 @@ module "mhs" {
     source              = "./modules/mhs/"
     region = "${var.region}"
 }
+
+module "dns" {
+    source              = "./modules/dns/"
+}

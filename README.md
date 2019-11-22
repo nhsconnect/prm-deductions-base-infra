@@ -6,6 +6,7 @@ Scope of infrastructure which should be in this repository:
 
 That implies:
  * ECR repositories for docker images that we produce
+ * Common DNS zones
 
 # Development and workflow
 
