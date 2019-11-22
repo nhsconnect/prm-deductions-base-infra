@@ -18,6 +18,11 @@ module "mhs" {
     region = "${var.region}"
 }
 
+module "dns" {
+    source              = "./modules/dns/"
+    region = "${var.region}"
+}
+
 module "transit-opentest" {
     source              = "./modules/transit-opentest/"
     region = "${var.region}"
