@@ -18,6 +18,11 @@ module "mhs" {
     region = "${var.region}"
 }
 
+module "hscn" {
+    source              = "./modules/hscn/"
+    region = "${var.region}"
+}
+
 module "dns" {
     source              = "./modules/dns/"
 }

@@ -1,2 +1,3 @@
 /.terraform/
 /modules/transit-opentest/ssh/
+/nhs_deployment.tfplan
