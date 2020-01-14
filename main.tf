@@ -26,3 +26,8 @@ module "hscn" {
 module "dns" {
     source              = "./modules/dns/"
 }
+
+module "prm" {
+    source              = "./modules/prm/"
+    region = "${var.region}"
+}
