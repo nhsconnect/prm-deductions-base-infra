@@ -13,3 +13,7 @@ resource "aws_ecr_repository" "scr-web-service-repo" {
 resource "aws_ecr_repository" "mhs-route-repo" {
     name = "mhs-route"
 }
+
+resource "aws_ecr_repository" "mhs-unbound-dns" {
+    name = "mhs-unbound-dns"
+}
