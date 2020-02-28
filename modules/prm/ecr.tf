@@ -9,3 +9,7 @@ resource "aws_ecr_repository" "generic-component-repo" {
 resource "aws_ecr_repository" "administration-portal-repo" {
     name = "deductions/administration-portal"
 } 
+
+resource "aws_ecr_repository" "gp-to-repo-repo" {
+    name = "deductions/gp-to-repo"
+} 
