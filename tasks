@@ -51,6 +51,25 @@ case "${command}" in
   tf_apply_whitelist)
       dojo "./tasks _tf_apply_whitelist"
       ;;
+  _set_ip)
+      my_ip=$(curl icanhazip.com)
+      my_username="${DOJO_USER}"
+      set +e
+      aws ssm put-parameter \
+       --region "${AWS_REGION}" \
+       --name "/NHS/ip_whitelist/${my_username}/ipv4" \
+       --type String \
+       --overwrite \
+       --value "${my_ip}"
+      if [ $? != "0" ]; then
+        echo "You need to authenticate with AWS first!"
+        exit 5
+      fi
+      echo "Updated your IP to ${my_ip} at /NHS/ip_whitelist/${my_username}/ipv4"
+      ;;
+  set_ip) # To be used by developers when changing their IP
+      dojo "./tasks _set_ip"
+      ;;
   *)
       echo "Invalid command: '${command}'"
       exit 1
