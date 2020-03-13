@@ -43,6 +43,14 @@ case "${command}" in
   tf_apply)
       dojo "./tasks _tf_apply"
       ;;
+  _tf_apply_whitelist)
+      cd ip_whitelist
+      terraform init
+      terraform apply -auto-approve
+      ;;
+  tf_apply_whitelist)
+      dojo "./tasks _tf_apply_whitelist"
+      ;;
   *)
       echo "Invalid command: '${command}'"
       exit 1

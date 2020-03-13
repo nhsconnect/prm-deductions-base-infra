@@ -1,3 +1,4 @@
 /.terraform/
 /modules/transit-opentest/ssh/
 /nhs_deployment.tfplan
+/ip_whitelist/.terraform/

@@ -1,0 +1,21 @@
+format_version: 4
+pipelines:
+  "prm-deductions-whitelist":
+    group: deductions
+    label_template: "${git[:8]}"
+    materials:
+      git:
+        type: configrepo
+    stages:
+      - deploy:
+          clean_workspace: true
+          jobs:
+            apply:
+              resources:
+                - docker
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks tf_apply_whitelist
