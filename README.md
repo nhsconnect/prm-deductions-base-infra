@@ -6,6 +6,15 @@ Scope of infrastructure which should be in this repository:
 
 That implies:
  * ECR repositories for docker images that we produce
+ * DNS zone shared by all environments
+ * IP whitelisting and public-facing security groups
+
+# Updating whitelisted IPs
+
+To make sure that you can access deductions services such as VPN or GOCD, please run following script anytime when your IP changes:
+```
+./tasks allow_my_ip <role_arn> <mfa_code>
+```
 
 # Development and workflow
 
@@ -36,7 +45,7 @@ at the root of the project.
 
 Assume role with elevated permissions:
 ```
-eval $(aws-cli-assumerole -rmfa <role-arn> <your-username> <mfa-otp-code>)
+eval $(aws-cli-assumerole -rmfa <role-arn> <mfa-otp-code>)
 ```
 
 Work with terraform as usual:

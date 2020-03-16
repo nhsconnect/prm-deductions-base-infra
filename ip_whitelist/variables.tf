@@ -9,7 +9,10 @@ variable "vpn_port" {
 #TODO: put allowed users here
 variable "users" {
   default = [
-    "tomzo",
-    "rob"
+    "tomzo",          # Tomasz Setkowski
+    "phil",           # Phil Evans
+    "helen.zhou",     # Helen Zhou
+    "rosieamphlett",  # Rosie Amphlett
+    "bfisher"         # Brett Fisher
   ]
 }
