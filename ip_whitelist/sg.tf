@@ -59,3 +59,27 @@ resource "aws_ssm_parameter" "test_vpn_sg" {
   type = "String"
   value = aws_security_group.test_vpn_sg.id
 }
+
+resource "aws_security_group" "gocd_sg" {
+  name        = "GoCD public access"
+  description = "Security group for GoCD public access"
+  vpc_id      = data.aws_ssm_parameter.gocd_vpc_id.value
+
+  # HTTPS from whitelisted IP
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = local.allowed_public_ips
+  }
+
+  tags = {
+    Name      = "GoCD public access"
+  }
+}
+
+resource "aws_ssm_parameter" "gocd_sg" {
+  name = "/NHS/GoCD/prod/gocd_sg"
+  type = "String"
+  value = aws_security_group.gocd_sg.id
+}

@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-# The legacy whitelist
+# The legacy whitelist, should have only offices in it
 data "aws_ssm_parameter" "inbound_ips" {
     name = "/NHS/dev-${data.aws_caller_identity.current.account_id}/tf/inbound_ips"
 }
@@ -36,4 +36,8 @@ data "aws_ssm_parameter" "dev_vpc_id" {
 
 data "aws_ssm_parameter" "test_vpc_id" {
   name = "/nhs/test/deductions_private_vpc_id"
+}
+
+data "aws_ssm_parameter" "gocd_vpc_id" {
+  name = "/NHS/deductions-${data.aws_caller_identity.current.account_id}/gocd-prod/vpc_id"
 }
