@@ -13,6 +13,7 @@ variable "users" {
     "phil",           # Phil Evans
     "helen.zhou",     # Helen Zhou
     "rosieamphlett",  # Rosie Amphlett
-    "bfisher"         # Brett Fisher
+    "bfisher",        # Brett Fisher
+    "robert"          # Robert Joscelyne
   ]
 }
