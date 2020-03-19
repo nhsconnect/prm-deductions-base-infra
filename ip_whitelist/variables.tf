@@ -14,7 +14,7 @@ variable "users" {
     "helen.zhou",     # Helen Zhou
     "rosieamphlett",  # Rosie Amphlett
     "bfisher",        # Brett Fisher
-    "robert"          # Robert Joscelyne
+    "robert",         # Robert Joscelyne
     "dorota"          # Dorota Sobkow
   ]
 }
