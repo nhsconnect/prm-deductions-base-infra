@@ -15,6 +15,8 @@ variable "users" {
     "rosieamphlett",  # Rosie Amphlett
     "bfisher",        # Brett Fisher
     "robert",         # Robert Joscelyne
-    "dorota"          # Dorota Sobkow
+    "dorota",         # Dorota Sobkow
+    "jamesgreen",     # James Green
+    "matthewpeers"    # Matthew Peers           
   ]
 }
