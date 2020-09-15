@@ -32,6 +32,6 @@ module "prm" {
     region = "${var.region}"
 }
 
-module "whitelist" {
-    source              = "./modules/whitelist_lambda/"
-}
+# module "whitelist" {
+#     source              = "./modules/whitelist_lambda/"
+# }
