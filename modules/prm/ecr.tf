@@ -13,3 +13,11 @@ resource "aws_ecr_repository" "administration-portal-repo" {
 resource "aws_ecr_repository" "gp-to-repo-repo" {
     name = "deductions/gp-to-repo"
 } 
+
+resource "aws_ecr_repository" "gp2gp-adaptor-ecr-repo" {
+    name = "deductions/gp2gp-adaptor"
+}
+
+resource "aws_ecr_repository" "ehr-repo-ecr-repo" {
+    name = "deductions/ehr-repo"
+}
