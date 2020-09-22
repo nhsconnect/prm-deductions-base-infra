@@ -7,7 +7,7 @@ provider "aws" {
 terraform{
       backend "s3" {
         bucket  = "prm-deductions-terraform-state"
-        key     = "base/terraform.tfstate"
+        key     = "base-infra/terraform.tfstate"
         region  = "eu-west-2"
         encrypt = true
     }
