@@ -98,22 +98,22 @@ case "${command}" in
       unset AWS_ACCESS_KEY_ID
       unset AWS_SECRET_ACCESS_KEY
       unset AWS_SESSION_TOKEN
-      role_arn=$2
-      mfa=$3
-      if [ -z "${role_arn}" ]; then
-        echo "Please specify admin role arn."
-        echo "Usage:"
-        echo "./tasks allow_my_ip <role_arn> <mfa-code>"
-        exit 5
-      fi
+      mfa=$2
+      config_profile=$3
       if [ -z "${mfa}" ]; then
         echo "Please specify mfa-code"
         echo "Usage:"
-        echo "./tasks allow_my_ip <role_arn> <mfa-code>"
+        echo "./tasks allow_my_ip <config_profile> <mfa-code>"
         exit 5
       fi
-      echo "Role ARN: $role_arn; MFA: $mfa"
-      eval $(dojo "aws-cli-assumerole -rmfa ${role_arn} ${mfa}")
+      if [ -z "${config_profile}" ]; then
+        echo "Please specify the profile of the role you want to assume."
+        echo "Usage:"
+        echo "./tasks allow_my_ip <config_profile> <mfa-code>"
+        exit 5
+      fi
+      echo "Role ARN: $config_profile; MFA: $mfa"
+      eval $(dojo "echo ${mfa} | assume-role ${config_profile}")
       ./tasks set_ip
       ./tasks trigger_pipeline
       ;;
