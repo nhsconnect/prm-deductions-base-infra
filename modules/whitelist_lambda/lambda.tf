@@ -15,7 +15,7 @@ variable "subnet_id" {
 }
 
 data "aws_subnet" "gocd_subnet" {
-  id = "${var.subnet_id}"
+  id = var.subnet_id
 }
 
 locals {

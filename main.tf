@@ -1,7 +1,7 @@
 provider "aws" {
   profile   = "default"
   version   = "~> 2.27"
-  region    = "${var.region}"
+  region    = var.region
 }
 
 terraform{
@@ -15,12 +15,12 @@ terraform{
 
 module "mhs" {
     source              = "./modules/mhs/"
-    region = "${var.region}"
+    region = var.region
 }
 
 # module "hscn" {
 #     source              = "./modules/hscn/"
-#     region = "${var.region}"
+#     region = var.region
 # }
 
 module "dns" {
@@ -29,7 +29,7 @@ module "dns" {
 
 module "prm" {
     source              = "./modules/prm/"
-    region = "${var.region}"
+    region = var.region
 }
 
 # module "whitelist" {
