@@ -114,8 +114,8 @@ case "${command}" in
       fi
       echo "Role ARN: $config_profile; MFA: $mfa"
       eval $(dojo "echo ${mfa} | assume-role ${config_profile}")
-      # ./tasks set_ip
-      # ./tasks trigger_pipeline
+      ./tasks set_ip
+      ./tasks trigger_pipeline
       ;;
   *)
       echo "Invalid command: '${command}'"
