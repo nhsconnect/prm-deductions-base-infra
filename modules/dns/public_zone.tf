@@ -4,7 +4,7 @@ resource "aws_route53_zone" "public" {
 
 # Save the zone IDs to use them in other infra projects
 resource "aws_ssm_parameter" "public_zone_id" {
-  name = "/NHS/deductions-${data.aws_caller_identity.current.account_id}/root_zone_id"
+  name = "/repo/prm-deductions-base-infra/output/root-zone-id"
   type  = "String"
   value = aws_route53_zone.public.zone_id
 }

@@ -70,7 +70,7 @@ case "${command}" in
       set +e
       aws ssm put-parameter \
        --region "${AWS_REGION}" \
-       --name "/NHS/ip_whitelist/${my_username}/ipv4" \
+       --name "/repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${my_username}" \
        --type String \
        --overwrite \
        --value "${my_ip}"
@@ -78,13 +78,13 @@ case "${command}" in
         echo "You need to authenticate with AWS first!"
         exit 5
       fi
-      echo "Updated your IP to ${my_ip} at /NHS/ip_whitelist/${my_username}/ipv4"
+      echo "Updated your IP to ${my_ip} at /repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${my_username}"
       ;;
   set_ip) # To be used by developers when changing their IP
       dojo "./tasks _set_ip"
       ;;
   _trigger_pipeline)
-      AUTHORIZATION_TOKEN=$(_get_aws_ssm_secret "/NHS/GoCD/prod/whitelist_auth_token")
+      AUTHORIZATION_TOKEN=$(_get_aws_ssm_secret "/repo/prod/prm-deductions-base-infra/output/gocd-whitelist-auth-token")
       aws lambda invoke \
         --region "${AWS_REGION}" \
         --function-name ip-whitelist-trigger \
@@ -114,8 +114,8 @@ case "${command}" in
       fi
       echo "Role ARN: $config_profile; MFA: $mfa"
       eval $(dojo "echo ${mfa} | assume-role ${config_profile}")
-      ./tasks set_ip
-      ./tasks trigger_pipeline
+      # ./tasks set_ip
+      # ./tasks trigger_pipeline
       ;;
   *)
       echo "Invalid command: '${command}'"

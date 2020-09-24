@@ -2,11 +2,11 @@ data "aws_caller_identity" "current" {}
 
 # The legacy whitelist, should have only offices in it
 data "aws_ssm_parameter" "inbound_ips" {
-    name = "/NHS/dev-${data.aws_caller_identity.current.account_id}/tf/inbound_ips"
+    name = "/repo/dev/prm-deductions-base-infra/output/tf-inbound-ips"
 }
 
 data "aws_ssm_parameter" "agent_ips" {
-    name = "/NHS/deductions-${data.aws_caller_identity.current.account_id}/gocd-prod/agent_ips"
+    name = "/repo/prod/prm-deductions-base-infra/output/gocd-agent-ips"
 }
 
 locals {
@@ -27,17 +27,17 @@ locals {
 
 data "aws_ssm_parameter" "ip" {
   count = length(var.users)
-  name = "/NHS/ip_whitelist/${var.users[count.index]}/ipv4"
+  name = "/repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${var.users[count.index]}"
 }
 
 data "aws_ssm_parameter" "dev_vpc_id" {
-  name = "/nhs/dev/deductions_private_vpc_id"
+  name = "/repo/dev/prm-deductions-base-infra/output/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "test_vpc_id" {
-  name = "/nhs/test/deductions_private_vpc_id"
+  name = "/repo/test/prm-deductions-base-infra/output/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "gocd_vpc_id" {
-  name = "/NHS/deductions-${data.aws_caller_identity.current.account_id}/gocd-prod/vpc_id"
+  name = "/repo/prod/prm-deductions-base-infra/output/gocd-vpc-id"
 }

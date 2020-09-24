@@ -24,7 +24,7 @@ resource "aws_security_group" "dev_vpn_sg" {
 }
 
 resource "aws_ssm_parameter" "dev_vpn_sg" {
-  name = "/nhs/dev/vpn_sg"
+  name = "/repo/dev/prm-deductions-base-infra/output/vpn-sg"
   type = "String"
   value = aws_security_group.dev_vpn_sg.id
 }
@@ -55,7 +55,7 @@ resource "aws_security_group" "test_vpn_sg" {
 }
 
 resource "aws_ssm_parameter" "test_vpn_sg" {
-  name = "/nhs/test/vpn_sg"
+  name = "/repo/test/prm-deductions-base-infra/output/vpn-sg"
   type = "String"
   value = aws_security_group.test_vpn_sg.id
 }
@@ -79,7 +79,7 @@ resource "aws_security_group" "gocd_sg" {
 }
 
 resource "aws_ssm_parameter" "gocd_sg" {
-  name = "/NHS/GoCD/prod/gocd_sg"
+  name = "/repo/prod/prm-deductions-base-infra/output/gocd-sg"
   type = "String"
   value = aws_security_group.gocd_sg.id
 }
