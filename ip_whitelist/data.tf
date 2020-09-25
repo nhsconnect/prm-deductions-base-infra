@@ -25,11 +25,11 @@ data "aws_ssm_parameter" "ip" {
 }
 
 data "aws_ssm_parameter" "dev_vpc_id" {
-  name = "/repo/dev/prm-deductions-base-infra/output/private-vpc-id"
+  name = "/repo/dev/prm-deductions-infra/output/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "test_vpc_id" {
-  name = "/repo/test/prm-deductions-base-infra/output/private-vpc-id"
+  name = "/repo/test/prm-deductions-infra/output/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "gocd_vpc_id" {
