@@ -1,10 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-# The legacy whitelist, should have only offices in it
-data "aws_ssm_parameter" "inbound_ips" {
-    name = "/repo/dev/prm-deductions-base-infra/output/tf-inbound-ips"
-}
-
 data "aws_ssm_parameter" "agent_ips" {
     name = "/repo/prod/prm-deductions-base-infra/output/gocd-agent-ips"
 }
@@ -21,7 +16,6 @@ locals {
   # This local should be the only source of truth on what IPs are allowed to connect from the Internet
   allowed_public_ips = concat(
     local.whitelist_ips,
-    split(",", data.aws_ssm_parameter.inbound_ips.value),
     local.agent_cidrs)
 }
 

@@ -10,9 +10,6 @@ function tf_plan {
   terraform init
   terraform get # modules
   if [[ "${operation}" == "create" ]]; then
-    cd modules/whitelist_lambda/lambda
-    zip -r ../lambda.zip .
-    cd ../../..
     terraform plan -var-file=terraform.tfvars -out="nhs_deployment.tfplan"
   elif [[ "${operation}" == "destroy" ]]; then
     terraform plan -var-file=terraform.tfvars -out="nhs_deployment.tfplan" -destroy
