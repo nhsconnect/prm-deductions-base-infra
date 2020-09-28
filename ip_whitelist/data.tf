@@ -33,5 +33,5 @@ data "aws_ssm_parameter" "test_vpc_id" {
 }
 
 data "aws_ssm_parameter" "gocd_vpc_id" {
-  name = "/repo/prod/prm-deductions-base-infra/output/gocd-vpc-id"
+  name = "/repo/prod/prm-gocd-infra/output/gocd-vpc-id"
 }
