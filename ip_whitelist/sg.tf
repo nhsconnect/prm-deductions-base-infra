@@ -20,6 +20,8 @@ resource "aws_security_group" "dev_vpn_sg" {
 
   tags = {
     Name      = "VPN to dev env"
+    CreatedBy = var.repo_name
+    Environment = "dev"
   }
 }
 
@@ -27,6 +29,11 @@ resource "aws_ssm_parameter" "dev_vpn_sg" {
   name = "/repo/dev/prm-deductions-base-infra/output/vpn-sg"
   type = "String"
   value = aws_security_group.dev_vpn_sg.id
+
+  tags = {
+    CreatedBy = var.repo_name
+    Environment = "dev"
+  }
 }
 
 resource "aws_security_group" "test_vpn_sg" {
@@ -51,6 +58,8 @@ resource "aws_security_group" "test_vpn_sg" {
 
   tags = {
     Name      = "VPN to test env"
+    CreatedBy = var.repo_name
+    Environment = "test"
   }
 }
 
@@ -58,6 +67,11 @@ resource "aws_ssm_parameter" "test_vpn_sg" {
   name = "/repo/test/prm-deductions-base-infra/output/vpn-sg"
   type = "String"
   value = aws_security_group.test_vpn_sg.id
+
+  tags = {
+    CreatedBy = var.repo_name
+    Environment = "test"
+  }
 }
 
 resource "aws_security_group" "gocd_sg" {
@@ -75,6 +89,8 @@ resource "aws_security_group" "gocd_sg" {
 
   tags = {
     Name      = "GoCD public access"
+    CreatedBy = var.repo_name
+    Environment = "prod"
   }
 }
 
@@ -82,4 +98,9 @@ resource "aws_ssm_parameter" "gocd_sg" {
   name = "/repo/prod/prm-deductions-base-infra/output/gocd-sg"
   type = "String"
   value = aws_security_group.gocd_sg.id
+
+  tags = {
+    CreatedBy = var.repo_name
+    Environment = "prod"
+  }
 }
