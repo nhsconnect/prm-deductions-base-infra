@@ -81,7 +81,7 @@ case "${command}" in
       dojo "./tasks _set_ip"
       ;;
   _trigger_pipeline)
-      AUTHORIZATION_TOKEN=$(_get_aws_ssm_secret "/repo/prod/prm-deductions-base-infra/output/gocd-whitelist-auth-token")
+      AUTHORIZATION_TOKEN=$(_get_aws_ssm_secret "/repo/prod/output/prm-deductions-base-infra/gocd-whitelist-auth-token")
       aws lambda invoke \
         --region "${AWS_REGION}" \
         --function-name ip-whitelist-trigger \

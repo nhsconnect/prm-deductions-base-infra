@@ -26,7 +26,7 @@ resource "aws_security_group" "dev_vpn_sg" {
 }
 
 resource "aws_ssm_parameter" "dev_vpn_sg" {
-  name = "/repo/dev/${var.repo_name}/output/vpn-sg"
+  name = "/repo/dev/output/${var.repo_name}/vpn-sg"
   type = "String"
   value = aws_security_group.dev_vpn_sg.id
 
@@ -64,7 +64,7 @@ resource "aws_security_group" "test_vpn_sg" {
 }
 
 resource "aws_ssm_parameter" "test_vpn_sg" {
-  name = "/repo/test/${var.repo_name}/output/vpn-sg"
+  name = "/repo/test/output/${var.repo_name}/vpn-sg"
   type = "String"
   value = aws_security_group.test_vpn_sg.id
 
@@ -95,7 +95,7 @@ resource "aws_security_group" "gocd_sg" {
 }
 
 resource "aws_ssm_parameter" "gocd_sg" {
-  name = "/repo/prod/${var.repo_name}/output/gocd-sg"
+  name = "/repo/prod/output/${var.repo_name}/gocd-sg"
   type = "String"
   value = aws_security_group.gocd_sg.id
 

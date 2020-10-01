@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 
 data "aws_ssm_parameter" "agent_ips" {
-    name = "/repo/prod/prm-gocd-infra/output/gocd-agent-ips"
+    name = "/repo/prod/output/prm-gocd-infra/gocd-agent-ips"
 }
 
 locals {
@@ -25,13 +25,13 @@ data "aws_ssm_parameter" "ip" {
 }
 
 data "aws_ssm_parameter" "dev_vpc_id" {
-  name = "/repo/dev/prm-deductions-infra/output/private-vpc-id"
+  name = "/repo/dev/output/prm-deductions-infra/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "test_vpc_id" {
-  name = "/repo/test/prm-deductions-infra/output/private-vpc-id"
+  name = "/repo/test/output/prm-deductions-infra/private-vpc-id"
 }
 
 data "aws_ssm_parameter" "gocd_vpc_id" {
-  name = "/repo/prod/prm-gocd-infra/output/gocd-vpc-id"
+  name = "/repo/prod/output/prm-gocd-infra/gocd-vpc-id"
 }
