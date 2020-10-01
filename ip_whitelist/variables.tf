@@ -6,6 +6,11 @@ variable "vpn_port" {
   default = 443
 }
 
+variable "repo_name" {
+  type = string
+  default = "prm-deductions-base-infra"
+}
+
 #TODO: put allowed users here
 variable "users" {
   default = [
