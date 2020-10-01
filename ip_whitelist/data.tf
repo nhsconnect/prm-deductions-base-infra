@@ -21,7 +21,7 @@ locals {
 
 data "aws_ssm_parameter" "ip" {
   count = length(var.users)
-  name = "/repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${var.users[count.index]}"
+  name = "/repo/user-input/whitelisted-ipv4-${var.users[count.index]}"
 }
 
 data "aws_ssm_parameter" "dev_vpc_id" {

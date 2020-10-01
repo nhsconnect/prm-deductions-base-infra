@@ -67,7 +67,7 @@ case "${command}" in
       set +e
       aws ssm put-parameter \
        --region "${AWS_REGION}" \
-       --name "/repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${my_username}" \
+       --name "/repo/user-input/whitelisted-ipv4-${my_username}" \
        --type String \
        --overwrite \
        --value "${my_ip}"
@@ -75,7 +75,7 @@ case "${command}" in
         echo "You need to authenticate with AWS first!"
         exit 5
       fi
-      echo "Updated your IP to ${my_ip} at /repo/prm-deductions-base-infra/user-input/whitelisted-ipv4-${my_username}"
+      echo "Updated your IP to ${my_ip} at /repo/user-input/whitelisted-ipv4-${my_username}"
       ;;
   set_ip) # To be used by developers when changing their IP
       dojo "./tasks _set_ip"
