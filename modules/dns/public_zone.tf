@@ -8,11 +8,7 @@ resource "aws_route53_zone" "public" {
 
 # Save the zone IDs to use them in other infra projects
 resource "aws_ssm_parameter" "public_zone_id" {
-<<<<<<< HEAD
-  name = "/repo/${var.repo_name}/output/root-zone-id"
-=======
-  name = "/repo/output/prm-deductions-base-infra/root-zone-id"
->>>>>>> [PRMT-1121] Move output to match the ssm keys convention
+  name = "/repo/output/${var.repo_name}/root-zone-id"
   type  = "String"
   value = aws_route53_zone.public.zone_id
 
