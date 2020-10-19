@@ -53,67 +53,6 @@ case "${command}" in
   tf_apply)
       dojo "./tasks _tf_apply"
       ;;
-  _tf_apply_whitelist)
-      cd ip_whitelist
-      terraform init
-      terraform apply -auto-approve
-      ;;
-  tf_apply_whitelist)
-      dojo "./tasks _tf_apply_whitelist"
-      ;;
-  _set_ip)
-      my_ip=$(curl icanhazip.com)
-      my_username="${DOJO_USER}"
-      set +e
-      aws ssm put-parameter \
-       --region "${AWS_REGION}" \
-       --name "/repo/user-input/whitelisted-ipv4-${my_username}" \
-       --type String \
-       --overwrite \
-       --value "${my_ip}"
-      if [ $? != "0" ]; then
-        echo "You need to authenticate with AWS first!"
-        exit 5
-      fi
-      echo "Updated your IP to ${my_ip} at /repo/user-input/whitelisted-ipv4-${my_username}"
-      ;;
-  set_ip) # To be used by developers when changing their IP
-      dojo "./tasks _set_ip"
-      ;;
-  _trigger_pipeline)
-      AUTHORIZATION_TOKEN=$(_get_aws_ssm_secret "/repo/prod/output/prm-deductions-base-infra/gocd-whitelist-auth-token")
-      aws lambda invoke \
-        --region "${AWS_REGION}" \
-        --function-name ip-whitelist-trigger \
-        --payload "{\"AUTHORIZATION_TOKEN\": \"$AUTHORIZATION_TOKEN\"}" \
-        response.json
-      ;;
-  trigger_pipeline)
-      dojo "./tasks _trigger_pipeline"
-      ;;
-  allow_my_ip)
-      unset AWS_ACCESS_KEY_ID
-      unset AWS_SECRET_ACCESS_KEY
-      unset AWS_SESSION_TOKEN
-      mfa=$2
-      config_profile=$3
-      if [ -z "${mfa}" ]; then
-        echo "Please specify mfa-code"
-        echo "Usage:"
-        echo "./tasks allow_my_ip <config_profile> <mfa-code>"
-        exit 5
-      fi
-      if [ -z "${config_profile}" ]; then
-        echo "Please specify the profile of the role you want to assume."
-        echo "Usage:"
-        echo "./tasks allow_my_ip <config_profile> <mfa-code>"
-        exit 5
-      fi
-      echo "Role ARN: $config_profile; MFA: $mfa"
-      eval $(dojo "echo ${mfa} | assume-role ${config_profile}")
-      ./tasks set_ip
-      ./tasks trigger_pipeline
-      ;;
   *)
       echo "Invalid command: '${command}'"
       exit 1

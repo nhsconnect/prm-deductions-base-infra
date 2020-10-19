@@ -7,14 +7,6 @@ Scope of infrastructure which should be in this repository:
 That implies:
  * ECR repositories for docker images that we produce
  * DNS zone shared by all environments
- * IP whitelisting and public-facing security groups
-
-# Updating whitelisted IPs
-
-To make sure that you can access deductions services such as VPN or GOCD, please run following script anytime when your IP changes:
-```
-./tasks allow_my_ip <role_arn> <mfa_code>
-```
 
 # Development and workflow
 
@@ -47,11 +39,9 @@ Set up a profile for each role you would like to assume in `~/.aws/config`, for 
 
 ```
 [profile default]
-region = eu-west-2
 output = json
 
 [profile admin]
-region = eu-west-2
 role_arn = <role-arn>
 mfa_serial = <mfa-arn>
 source_profile = default
@@ -64,7 +54,7 @@ aws_access_key_id = <your-aws-access-key-id>
 aws_secret_access_key = <your-aws-secret-access-key>
 ```
 
-### Assume role with elevated permissions 
+### Assume role with elevated permissions
 
 #### Install `assume-role` locally:
 `brew install remind101/formulae/assume-role`
