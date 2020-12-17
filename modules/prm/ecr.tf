@@ -17,17 +17,24 @@ resource "aws_ecr_repository" "administration-portal-repo" {
     tags = {
         CreatedBy = var.repo_name
     }
-} 
+}
 
 resource "aws_ecr_repository" "gp-to-repo-repo" {
     name = "deductions/gp-to-repo"
     tags = {
         CreatedBy = var.repo_name
     }
-} 
+}
 
 resource "aws_ecr_repository" "gp2gp-adaptor-ecr-repo" {
     name = "deductions/gp2gp-adaptor"
+    tags = {
+        CreatedBy = var.repo_name
+    }
+}
+
+resource "aws_ecr_repository" "gp2gp-worker-ecr-repo" {
+    name = "deductions/gp2gp-worker"
     tags = {
         CreatedBy = var.repo_name
     }
