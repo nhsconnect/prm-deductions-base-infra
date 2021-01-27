@@ -40,6 +40,13 @@ resource "aws_ecr_repository" "gp2gp-worker-ecr-repo" {
     }
 }
 
+resource "aws_ecr_repository" "gp2gp-message-handler-ecr-repo" {
+    name = "deductions/gp2gp-message-handler"
+    tags = {
+        CreatedBy = var.repo_name
+    }
+}
+
 resource "aws_ecr_repository" "ehr-repo-ecr-repo" {
     name = "deductions/ehr-repo"
     tags = {
