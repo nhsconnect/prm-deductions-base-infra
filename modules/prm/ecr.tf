@@ -33,13 +33,6 @@ resource "aws_ecr_repository" "gp2gp-adaptor-ecr-repo" {
     }
 }
 
-resource "aws_ecr_repository" "gp2gp-worker-ecr-repo" {
-    name = "deductions/gp2gp-worker"
-    tags = {
-        CreatedBy = var.repo_name
-    }
-}
-
 resource "aws_ecr_repository" "gp2gp-message-handler-ecr-repo" {
     name = "deductions/gp2gp-message-handler"
     tags = {
