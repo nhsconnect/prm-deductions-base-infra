@@ -1,26 +1,12 @@
-resource "aws_ecr_repository" "poc" {
-    name = "prm/prm-migration-poc"
-    tags = {
-        CreatedBy = var.repo_name
-    }
-}
-
-resource "aws_ecr_repository" "generic-component-repo" {
-    name = "deductions/generic-component"
-    tags = {
-        CreatedBy = var.repo_name
-    }
-}
-
-resource "aws_ecr_repository" "administration-portal-repo" {
-    name = "deductions/administration-portal"
-    tags = {
-        CreatedBy = var.repo_name
-    }
-}
-
 resource "aws_ecr_repository" "gp-to-repo-repo" {
     name = "deductions/gp-to-repo"
+    tags = {
+        CreatedBy = var.repo_name
+    }
+}
+
+resource "aws_ecr_repository" "repo-to-gp-repo" {
+    name = "deductions/repo-to-gp"
     tags = {
         CreatedBy = var.repo_name
     }
