@@ -13,11 +13,6 @@ terraform{
     }
 }
 
-module "mhs" {
-    source              = "./modules/mhs/"
-    region = var.region
-}
-
 # module "hscn" {
 #     source              = "./modules/hscn/"
 #     region = var.region
@@ -25,9 +20,4 @@ module "mhs" {
 
 module "dns" {
     source              = "./modules/dns/"
-}
-
-module "prm" {
-    source              = "./modules/prm/"
-    region = var.region
 }
