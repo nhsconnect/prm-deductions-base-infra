@@ -27,29 +27,29 @@ pipelines:
                       - -c
                       - ./tasks tf_apply
 
-"prm-deductions-base-infra.test":
-  group: deductions
-  label_template: "${git[:8]}"
-  materials:
-    git:
-      type: configrepo
-  environment_variables:
-    NHS_ENVIRONMENT: test
-  stages:
-    - deploy:
-        clean_workspace: true
-        jobs:
-          apply:
-            resources:
-              - docker
-            tasks:
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks tf_plan create
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks tf_apply
+  "prm-deductions-base-infra.test":
+    group: deductions
+    label_template: "${git[:8]}"
+    materials:
+      git:
+        type: configrepo
+    environment_variables:
+      NHS_ENVIRONMENT: test
+    stages:
+      - deploy:
+         clean_workspace: true
+          jobs:
+            apply:
+              resources:
+                - docker
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks tf_plan create
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks tf_apply
