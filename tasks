@@ -3,11 +3,39 @@
 set -Eeo pipefail
 
 AWS_REGION=eu-west-2
+AWS_HELPERS_FILE="utils/aws-helpers"
+AWS_HELPERS_VERSION=0.2.1
+
+mkdir -p utils
+if [[ ! -f $AWS_HELPERS_FILE ]];then
+  wget --quiet -O $AWS_HELPERS_FILE https://github.com/nhsconnect/prm-deductions-support-infra/releases/download/${AWS_HELPERS_VERSION}/aws-helpers
+fi
+chmod +x $AWS_HELPERS_FILE
+source $AWS_HELPERS_FILE
+
+function check_env {
+  if [[ -z "${NHS_ENVIRONMENT}" ]]; then
+    echo "Must set NHS_ENVIRONMENT"
+    exit 1
+  fi
+}
+
+function tf_init {
+  check_env
+  #  Condition [ $NHS_ENVIRONMENT == "test" ] is required as test environment infrastructure is deployed in CI AWS account
+  [ $NHS_ENVIRONMENT == "ci" ] || [ $NHS_ENVIRONMENT == "test" ] &&  bucket_env_infix=""  || bucket_env_infix="$NHS_ENVIRONMENT-"
+
+  terraform init -reconfigure \
+    -backend-config key="${NHS_SERVICE}-${NHS_ENVIRONMENT}/terraform.tfstate" \
+    -backend-config bucket="prm-deductions-${bucket_env_infix}terraform-state" \
+    -backend-config dynamodb_table="prm-deductions-${bucket_env_infix}terraform-table" \
+    -backend-config region=${AWS_DEFAULT_REGION}
+}
 
 function tf_plan {
   operation=$1
 
-  terraform init
+  tf_init
   terraform get # modules
   if [[ "${operation}" == "create" ]]; then
     terraform plan -var-file=terraform.tfvars -out="nhs_deployment.tfplan"
@@ -20,7 +48,7 @@ function tf_plan {
 }
 
 function tf_apply {
-  terraform init
+  tf_init
   terraform get # modules
   terraform apply nhs_deployment.tfplan
   terraform output -json > tf-out.json
@@ -42,12 +70,14 @@ case "${command}" in
       dojo "bash"
       ;;
   _tf_plan)
+      _assume_environment_role $NHS_ENVIRONMENT
       tf_plan "$2"
       ;;
   tf_plan)
       dojo "./tasks _tf_plan $2"
       ;;
   _tf_apply)
+      _assume_environment_role $NHS_ENVIRONMENT
       tf_apply
       ;;
   tf_apply)
