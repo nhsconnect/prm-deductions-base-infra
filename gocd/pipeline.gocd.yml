@@ -37,7 +37,7 @@ pipelines:
       NHS_ENVIRONMENT: test
     stages:
       - deploy:
-         clean_workspace: true
+          clean_workspace: true
           jobs:
             apply:
               resources:
