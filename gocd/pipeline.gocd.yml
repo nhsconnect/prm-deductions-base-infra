@@ -1,6 +1,6 @@
 format_version: 4
 pipelines:
-  "prm-deductions-base-infra-dev":
+  "prm-deductions-base-infra.dev":
     group: deductions
     label_template: "${git[:8]}"
     materials:
@@ -27,7 +27,7 @@ pipelines:
                       - -c
                       - ./tasks tf_apply
 
-"prm-deductions-base-infra-test":
+"prm-deductions-base-infra.test":
   group: deductions
   label_template: "${git[:8]}"
   materials:
