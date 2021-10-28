@@ -6,7 +6,6 @@ resource "aws_route53_zone" "public" {
   }
 }
 
-# Save the zone IDs to use them in other infra projects
 resource "aws_ssm_parameter" "public_zone_id" {
   name = "/repo/output/${var.repo_name}/root-zone-id"
   type  = "String"
@@ -17,11 +16,8 @@ resource "aws_ssm_parameter" "public_zone_id" {
   }
 }
 
-output "public_zone_ns" {
-  value = aws_route53_zone.public.name_servers
-}
-
 resource "aws_route53_zone" "non_prod_public" {
+  provider = aws.ci
   name = "non-prod.patient-deductions.nhs.uk"
 
   tags = {
