@@ -9,11 +9,11 @@ function tf_plan {
 
   aws_account_arn=$(aws sts get-caller-identity | jq -r .Arn)
 
-  if [[ $aws_account_arn =~ "gocd_agent-prod" || $aws_account_arn =~ "Deployer" ]]; then
-    COMMON_ACCOUNT_ROLE="CiToEnvLinker"
-  else
-    COMMON_ACCOUNT_ROLE="CiReadOnly"
-  fi
+#  if [[ $aws_account_arn =~ "gocd_agent-prod" || $aws_account_arn =~ "Deployer" ]]; then
+  COMMON_ACCOUNT_ROLE="CiToEnvLinker"
+#  else
+#    COMMON_ACCOUNT_ROLE="CiReadOnly"
+#  fi
   echo "Instructing terraform to assume ${COMMON_ACCOUNT_ROLE} role for cross account actions"
   COMMON_ACCOUNT_ID=$(_get_aws_ssm_secret "/repo/ci/user-input/external/aws-account-id")
 
@@ -33,7 +33,6 @@ function tf_apply {
   terraform init
   terraform get # modules
   terraform apply nhs_deployment.tfplan
-  terraform output -json > tf-out.json
 }
 
 function _get_aws_ssm_secret {

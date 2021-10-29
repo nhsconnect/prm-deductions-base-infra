@@ -6,7 +6,10 @@ resource "aws_route53_zone" "public" {
   }
 }
 
+// Even though the zone is created in prod account, we save its ID in ci account
+// so that we can leverage the multi provider terraform setup in deductions-infra
 resource "aws_ssm_parameter" "public_zone_id" {
+  provider = aws.ci
   name = "/repo/output/${var.repo_name}/root-zone-id"
   type  = "String"
   value = aws_route53_zone.public.zone_id
@@ -35,6 +38,7 @@ resource "aws_route53_record" "non_prod_ns" {
 }
 
 resource "aws_ssm_parameter" "non_prod_public_zone_id" {
+  provider = aws.ci
   name = "/repo/output/${var.repo_name}/non-prod-public-zone-id"
   type  = "String"
   value = aws_route53_zone.non_prod_public.zone_id
