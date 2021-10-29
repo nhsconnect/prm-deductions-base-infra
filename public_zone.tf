@@ -28,6 +28,17 @@ resource "aws_route53_zone" "non_prod_public" {
   }
 }
 
+// This should be removed once NHS points to the root zone in production
+resource "aws_route53_record" "non_prod_ns_ci" {
+  provider = aws.ci
+  name = "non-prod.patient-deductions.nhs.uk"
+  ttl = 30
+  type = "NS"
+  zone_id = var.root_dns_zone_id_in_ci
+
+  records = aws_route53_zone.non_prod_public.name_servers
+}
+
 resource "aws_route53_record" "non_prod_ns" {
   name = "non-prod.patient-deductions.nhs.uk"
   ttl = 30
