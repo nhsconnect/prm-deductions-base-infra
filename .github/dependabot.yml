@@ -6,14 +6,7 @@ updates:
       interval: "weekly"
       timezone: "Europe/London"
       time: "09:00"
-  - package-ecosystem: "docker"
-    directory: "/" 
-    schedule: 
-      interval: "weekly" 
-      timezone: "Europe/London" 
-      time: "09:00" 
-  - package-ecosystem: 
-    "github-actions" 
+  - package-ecosystem: "github-actions" 
     directory: "/" 
     schedule: 
       interval: "weekly" 
